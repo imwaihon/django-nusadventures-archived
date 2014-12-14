@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+
+{% block body_block %}
+
+<div class="container">
+
+  <div class="row">
+    <div class="col-md-8">
+    <h1>View Archived Modules</h1>
+
+    </div>
+
+    <div class="col-md-4">
+        <br>
+    </div>
+
+  </div>
+          <hr>
+  <br>
+
+  <div class="row">
+    <div class="col-md-12">
+
+
+    {% if user.is_authenticated %}
+
+    {% if modules %}
+
+
+    {% for module in modules %}
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <div class="btn-group pull-right">
+
+            </div>
+
+            <h3>{{ module.fixedModule.code }} - {{ module.fixedModule.name }}</h3>
+        </div>
+
+        
+
+
+
+            
+
+            <div class="panel-footer">
+            </div>
+
+
+
+    </div>    
+
+    {% endfor %}
+
+
+    {% else %}
+        <strong>No tasks or modules has been selected.</strong>
+    {% endif %}
+
+    {% endif %}
+
+
+
+    </div>
+
+
+
+</div>
+
+
+{% endblock %}

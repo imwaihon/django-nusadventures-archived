@@ -1,0 +1,37 @@
+{% extends 'superbase.html' %}
+
+{% load static %}
+
+
+
+{% block body_block %}
+
+
+<!-- Modal -->
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                 <h3 class="modal-title">Edit Description</h3>
+
+            </div>
+
+            <form id="edit_description" method="post" action="/edit_description/{{ userchar.user.username }}">
+            <div class="modal-body">
+
+  <textarea class="form-control" rows="3" id="describe" name="describe" style="margin: 0px -13.84375px 0px 0px; width: 424px; height: 117px;">{{ description }}</textarea>
+
+            {% csrf_token %}
+
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Change</button>
+            </div>
+
+            </form>
+  
+
+{% endblock %}
+
+

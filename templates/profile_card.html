@@ -1,0 +1,162 @@
+{% extends 'base.html' %}
+
+
+{% block body_block %}
+
+<div class="container">
+  <div class="row">
+    
+    <h1>Profile Card</h1>
+    <hr>
+
+  </div>
+
+  <div class="row">
+    <div class="col-md-8">
+        <h2>Character Info</h2>
+    </div>
+    <div class="col-md-4">
+        <br>
+        <a href="/upvote/{{ profileuser.username }}">
+        <button type="button" class="btn btn-success pull-right">
+        <i class="fa fa-thumbs-up"></i> Upvote
+    </button>
+    </a>
+    </div>
+</div>
+
+<hr>
+       {% if profileuser %} 
+        <div class="row">
+            <div class="col-md-2">
+            {% if userchar.profile_image_url %}
+            <img src="{{ userchar.profile_image_url }}">
+            {% else %}
+            <i class="fa fa-smile-o fa-4x fa-border"></i>
+            {% endif %}
+            </div>
+            <div class="col-md-10">
+                <h3>{{ profileuser.username }}<div class="pull-right">Level {{ userchar.level }}</div></h3>
+                <h5>{{ userchar.expAmt }} / {{ expToLevel }} EXP</h5>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-success" style="width:{{ expPercent }}%">
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <div class="col-md-6">
+
+        <div class="panel panel-warning">
+            <div class="panel-heading">
+            <h3 class="panel-title"><i class="fa fa-pencil pull-left"></i>Tasks<div class="pull-right">{{ userchar.taskAmt }}</div></h3>
+           
+            </div>
+        </div>
+
+        <div class="panel panel-success">
+            <div class="panel-heading">
+            <h3 class="panel-title"><i class="fa fa-thumbs-up pull-left"></i>Upvotes<div class="pull-right">{{ userchar.upvoteAmt }}</div></h3>
+            </div>
+        </div>        
+
+        </div>
+
+        <div class="col-md-6">
+
+        <div class="panel panel-info">
+            <div class="panel-heading">
+            <h3 class="panel-title"><i class="fa fa-star pull-left"></i>Contributions<div class="pull-right">{{ userchar.contribAmt }}</div></h3>
+            </div>
+        </div>
+
+        <div class="panel panel-danger">
+            <div class="panel-heading">
+            <h3 class="panel-title"><i class="fa fa-gamepad pull-left"></i>Challenges<div class="pull-right">{{ userchar.challengeAmt }}</div></h3>
+            </div>
+        </div>   
+
+
+        </div>
+
+
+
+  <div class="row">
+     <div class="col-md-12">
+
+
+        <div class="well well-lg">
+            {{ userchar.description }}
+        </div>
+    </div>
+</div>
+
+  <div class="row">
+
+
+    <div class="col-md-6">
+
+            <table class="table">
+            <thead>
+                <tr>
+                  <th>Active Modules</th>
+                </tr>
+            </thead>
+            {% for entry in active %}
+            <tbody>
+            <tr class="active">
+            <td style="vertical-align:middle" width = 100%>{{ entry.fixedModule.code }} {{ entry.fixedModule.name }}</td>
+
+            </tr>
+            </tbody>
+            {% endfor %}
+            </table>
+
+    </div>
+
+    <div class="col-md-6">
+
+            <table class="table">
+            <thead>
+                <tr>
+                  <th>Completed Modules</th>
+                </tr>
+            </thead>
+            {% for entry in completed %}
+            <tbody>
+            <tr class="active">
+            <td style="vertical-align:middle" width = 100%>{{ entry.fixedModule.code }} {{ entry.fixedModule.name }}</td>
+
+            </tr>
+            </tbody>
+            {% endfor %}
+            </table>
+
+    </div>
+
+</div>
+
+
+
+{% else %}
+
+  <div class="row">
+    <div class="col-md-12">
+
+        The username is invalid.
+
+    </div>
+
+
+
+</div>
+
+{% endif %}
+
+
+{% endblock %}

@@ -1,0 +1,125 @@
+{% extends 'base.html' %}
+
+
+{% block body_block %}
+
+<div class="container">
+
+  <div class="row">
+    <div class="col-md-8">
+    <h1>Parties Joined</h1>
+
+    </div>
+
+    <div class="col-md-4">
+        <br>
+    <a data-toggle="modal" data-target="#myModal" href="/create_party">
+    <button type="button" class="btn btn-success pull-right
+    ">
+        <i class="fa fa-plus"></i> Create Party
+    </button>
+    </a>
+    </div>
+
+  </div>
+          <hr>
+  <br>
+
+  <div class="row">
+    <div class="col-md-12">
+
+
+    {% if user.is_authenticated %}
+
+    {% if partylist %}
+
+
+    {% for party in partylist.values %}
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <div class="btn-group pull-right">
+            <a type="button" class="btn btn-primary" href="/party/{{ party.id }}">
+            <i class="fa fa-eye"></i> View Party
+            </a>
+
+            </div>
+
+            <h3>{{ party.name }}</h3>
+        </div>
+
+        
+
+
+
+
+            <ul class="list-group">
+
+
+
+            <div class="panel-footer">
+                {{ party.description }}
+            </div>
+
+
+
+    </div>    
+
+    {% endfor %}
+
+
+    {% else %}
+        <strong>You have not joined any parties. </strong>
+    {% endif %}
+
+    {% endif %}
+
+
+
+
+
+
+  <div class="row">
+    <div class="col-md-8">
+    <h1>Party Invites</h1>
+
+    </div>
+
+    <div class="col-md-4">
+
+    </div>
+
+  </div>
+          <hr>
+
+
+            <table class="table">
+            {% for partyinvite in partyinvites %}
+
+            <tr class="success">
+
+            <td style="vertical-align:middle" width = 40%><strong>{{ partyinvite.party.creator }}</strong> has invited you to the group <strong>{{ partyinvite.party.name }}</strong>!</td>
+
+            <td style="vertical-align:middle" width = 60%>
+                <div class="btn-group pull-right">
+<a data-toggle="modal" data-target="#myModal" href="/accept_party/{{ partyinvite.party.id }}">
+    <button type="button" class="btn btn-success">
+        Accept
+    </button>
+    </a>         
+
+    <a data-toggle="modal" data-target="#myModal" href="/decline_party/{{ partyinvite.party.id }}">
+    <button type="button" class="btn btn-danger">
+        Decline
+    </button>
+    </a>         
+            </div>
+            </td>
+            </tr>
+
+            {% endfor %}
+
+</div>
+
+
+{% endblock %}

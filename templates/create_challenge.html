@@ -1,0 +1,46 @@
+{% extends 'superbase.html' %}
+
+{% load static %}
+
+
+
+{% block body_block %}
+
+
+<!-- Modal -->
+            <form id="module_form" method="post" action="/create_challenge/">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                 <h3 class="modal-title">Create Challenge</h3>
+
+            </div>
+
+
+            <div class="modal-body">
+
+
+            {% csrf_token %}
+            {% for hidden in form.hidden_fields %}
+                {{ hidden }}
+            {% endfor %}
+            
+            {% for field in form.visible_fields %}
+                {{ field.errors }}
+                {{ field.help_text }}
+                <br>
+                {{ field }}
+                <br>
+                <br>
+            {% endfor %}
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Create Challenge</button>
+            </div>
+
+            </form>
+   
+
+{% endblock %}

@@ -1,0 +1,151 @@
+{% extends 'base.html' %}
+
+
+{% block body_block %}
+
+
+
+    <div class="container">
+     <h1>View Module</h1>
+     <hr>
+     <div class="row">
+        <div class="col-md-12">
+
+    {% if user.is_authenticated %}
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <div class="btn-group pull-right">
+            <a type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" href="/complete_module/{{ module.fixedModule.code }}">
+            <i class="fa fa-save"></i> Complete Module
+            </a>
+
+            <a type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" href="/{{ module.fixedModule.code }}/delete_module">
+            <i class="fa fa-trash-o"></i> Delete Module
+            </a>
+
+            <a type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#myModal" href="/module/{{ module }}/add_task">
+            <i class="fa fa-pencil"></i> Add Task
+            </a>
+            </div>
+            <h3>{{ module.fixedModule.code }} - {{ module.fixedModule.name }}</h3>
+
+
+        </div>
+
+            <!-- Table -->
+            {% if tasks %}
+            <ul class="list-group">
+
+            {% for task in tasks %}
+            <a class="list-group-item" data-toggle="collapse"  class="accordion-toggle" href="#{{ task.id }}">
+                <h4><strong>{{ task.name }}</strong><i class="fa fa-caret-down fa-2x pull-right"></i></h4>
+            </a>
+
+            <div class="accordion-body collapse" id="{{ task.id }}">
+            <table class="table">
+            <tbody>
+            <tr class="info">
+            <td style="vertical-align:middle" width = 20%>{{ task.created }}</td>
+
+            <td style="vertical-align:middle" width = 60%>{{ task.body }}</td>
+
+            <td style="vertical-align:middle" width = 20%>
+
+            <div class="btn-group pull-right">
+            <a type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal" href="/{{ task.id }}/delete_task">
+            <i class="fa fa-trash-o"></i>
+            </a>
+
+            <a type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal" href="/{{ module.fixedModule.code }}/{{ task.id }}/done_task">
+                Done
+            <i class="fa fa-check"></i>
+            </a>
+            </div>
+
+
+
+
+            </td>
+            </tr>
+            </tbody>
+            </table>
+            </div>
+            {% endfor %}
+
+            </ul>
+
+            {% else %}
+            <div class="panel-body">
+                <strong>No task has been specified.</strong>
+            </div>
+            {% endif %}
+
+            <div class="panel-footer">
+            </div>
+            
+
+    </div>
+
+    {% endif %}
+
+
+</div>
+
+</div>
+
+<h1>Completed Tasks</h1>
+<hr>
+
+<div class="row">
+    <div class="col-md-12">
+
+            {% if history %}
+
+
+            <table class="table">
+            <thead>
+                <tr>
+                  <th>Date Created</th>
+                  <th>Task Description</th>
+                  <th>Completed On</th>
+                  <th></th>
+                </tr>
+            </thead>
+            {% for entry in history %}
+            <tbody>
+            <tr class="success">
+            <td style="vertical-align:middle" width = 20%>{{ entry.created }}</td>
+
+            <td style="vertical-align:middle" width = 50%>{{ entry.body }}</td>
+
+            <td style="vertical-align:middle" width = 20%>{{ entry.completed }}</td>
+
+            <td style="vertical-align:middle" width = 10%>
+                <div class="btn-group pull-right">
+                <a type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal" href="/{{ entry.id }}/delete_task">
+                <i class="fa fa-trash-o"></i>
+                </a>
+            </div>
+            </td>
+            </tr>
+            </tbody>
+            {% endfor %}
+            </table>
+
+
+            {% else %}
+            <div class="panel-body">
+                <strong>There are no completed tasks for this module.</strong>
+            </div>
+            {% endif %}
+
+
+
+
+    </div>
+</div>
+
+</div>
+
+{% endblock %}

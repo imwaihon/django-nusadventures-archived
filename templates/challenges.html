@@ -1,0 +1,143 @@
+{% extends 'base.html' %}
+
+
+{% block body_block %}
+
+<div class="container">
+
+  <div class="row">
+    <div class="col-md-8">
+    <h1>View Active Challenges</h1>
+
+    </div>
+
+    <div class="col-md-4">
+    <br>
+
+    <a href="/created_challenges">
+    <button type="button" class="btn btn-danger pull-right
+    ">
+        <i class="fa fa-plus"></i> View Created Challenges
+    </button>
+    </a>
+
+
+
+    <a href="/add_challenge">
+    <button type="button" class="btn btn-success 
+    ">
+        <i class="fa fa-plus"></i> Add Challenge
+    </button>
+    </a>
+    </div>
+
+
+  </div>
+          <hr>
+  <br>
+
+  <div class="row">
+    <div class="col-md-12">
+
+
+    {% if user.is_authenticated %}
+
+    {% if challengetasks %}
+
+
+    {% for challenge, tasks in challengetasks.items %}
+
+    <div class="panel panel-danger">
+        <div class="panel-heading">
+            <div class="btn-group pull-right">
+            <a type="button" class="btn btn-default" href="/challenge/{{ challenge.id }}">
+            <i class="fa fa-eye"></i> View Challenge
+            </a>
+            </div>
+
+            <h3>{{ challenge }}</h3>
+        </div>
+
+        
+
+
+
+            <!-- Table -->
+            {% if tasks %}
+            <ul class="list-group">
+
+            {% for task in tasks %}
+            <a class="list-group-item" data-toggle="collapse" class="accordion-toggle" href="#{{ task.id }}">
+                <h4><strong>{{ task }}</strong><i class="fa fa-caret-down fa-2x pull-right"></i></h4>
+
+            </a>
+
+            <div class="accordion-body collapse" id="{{ task.id }}">
+            <table class="table">
+            <tbody>
+            <tr class="info">
+
+            <td style="vertical-align:middle" width = 80%>{{ task.challengetask.body }}</td>
+
+            <td style="vertical-align:middle" width = 20%>
+
+            <div class="btn-group pull-right">
+
+            {% if task.closed %}
+            <a type="button" class="btn btn-success disabled" data-toggle="modal" data-target="#myModal" href="/done_challenge_task/{{ challenge.id }}/{{ task.id }}/">
+                Completed!
+            </a>            
+            {% else %}
+            <a type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal" href="/done_challenge_task/{{ challenge.id }}/{{ task.id }}/">
+                Done
+            <i class="fa fa-check"></i>
+            </a>
+            {% endif %}
+            </div>
+
+
+
+
+            </td>
+            </tr>
+
+
+            </tbody>
+            </table>
+            </div>
+            {% endfor %}
+
+            </ul>
+
+            {% else %}
+            <div class="panel-body">
+                <strong>No task has been specified.</strong>
+            </div>
+            {% endif %}
+
+            <div class="panel-footer">
+            </div>
+
+
+
+    </div>    
+
+    {% endfor %}
+
+
+    {% else %}
+        <strong>No challenges has been selected.</strong>
+    {% endif %}
+
+    {% endif %}
+
+
+
+    </div>
+
+
+
+</div>
+
+
+{% endblock %}

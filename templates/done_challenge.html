@@ -1,0 +1,37 @@
+{% extends 'superbase.html' %}
+
+{% load static %}
+
+
+
+{% block body_block %}
+
+
+<!-- Modal -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                 <h3 class="modal-title">Complete Challenge</h3>
+
+            </div>
+
+            <form id="done_task_form" method="post" action="/done_challenge/{{ challenge_code }}">
+            <div class="modal-body"><div class="te"></div>
+
+            
+
+            {% csrf_token %}
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-success">Complete Challenge!</button>
+            </div>
+
+            </form>
+        </div>
+        <!-- /.modal-content -->
+
+
+{% endblock %}

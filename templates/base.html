@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+{% load static %}
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+        <link href="{% static 'css/font-awesome.css' %}" rel="stylesheet">
+        <link rel="stylesheet" href="{% static 'css/bootstrap-social.css' %}">
+        <style>
+            body {
+                padding-top: 50px;
+                padding-bottom: 20px;
+            }
+        </style>
+        <link rel="stylesheet" href="{% static 'css/main.css' %}">
+
+        <script src="{% static 'js/vendor/modernizr-2.6.2-respond-1.1.0.min.js' %}"></script>
+    </head>
+    <body>
+
+        <div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&appId=635945606501953&version=v2.0";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">NUSadventures</a> 
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="/about/">About</a></li>
+            <li><a href="/dashboard/">Dashboard</a></li>
+
+            <li class="dropdown">
+            <a href="/tasks/" class="dropdown-toggle" data-toggle="dropdown">Tasks <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+            <li><a href="/tasks/">View All Tasks</a></li>
+            <li><a href="/archived/">View Archived Modules</a></li>
+            </ul>
+            </li>
+
+
+            <li class="dropdown">
+            <a href="/challenges/" class="dropdown-toggle" data-toggle="dropdown">Challenges <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+            <li><a href="/challenges/">View Active Challenges</a></li>
+            <li><a href="/created_challenges/">View Created Challenges</a></li>
+            <li><a href="/add_challenge/">Search For Challenges</a></li>
+            </ul>
+            </li>
+
+
+            <li><a href="/all_party/">Party</a></li>
+
+
+            <li><a href="/leaderboard/">Leaderboard </a></li>
+          </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+              {% if user.is_authenticated %}
+              <li class="navbar-text">Welcome, {{ user.username }}!</li>
+              <li><a href="/accounts/logout/">Logout</a></li>
+              {% else %}
+              <li><a href="/accounts/signup/">Signup</a></li>
+              <li><a href="/accounts/login/">Login</a></li>
+              {% endif %}
+            </ul>
+        </div><!--/.navbar-collapse -->
+      </div>
+    </div>
+
+    {% block body_block %}
+
+    {% endblock %}
+
+
+     
+
+    <div class="container">
+      <br>
+      <br>
+      <div class="footer">
+        <center><p></p></center>
+      </div>
+    </div> <!-- /container -->
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="{% static 'js/vendor/jquery-1.11.0.min.js' %}"><\/script>')</script>   <!--potential error in no  %static -->
+
+        <script src="{% static 'js/vendor/bootstrap.min.js' %}"></script>
+
+        <script src="{% static 'js/main.js' %}"></script>
+
+        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+        <script>
+            (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+            function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+            e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+            e.src='//www.google-analytics.com/analytics.js';
+            r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+            ga('create','UA-XXXXX-X');ga('send','pageview');
+        </script>
+    </body>
+</html>

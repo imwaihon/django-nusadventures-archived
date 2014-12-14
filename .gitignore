@@ -1,0 +1,5 @@
+venv
+*pyc
+staticfiles
+nusadventures/local_settings.py
+nusadventures/settings.py

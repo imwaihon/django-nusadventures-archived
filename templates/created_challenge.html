@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+
+
+{% block body_block %}
+
+
+
+    <div class="container">
+     <h1>View Challenge</h1>
+     <hr>
+     <div class="row">
+        <div class="col-md-12">
+
+    {% if user.is_authenticated %}
+
+    <div class="panel panel-danger">
+        <div class="panel-heading">
+            <div class="btn-group pull-right">
+
+            <a type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal" href="/create_challenge_task/{{ challenge.id }}">
+            <i class="fa fa-pencil"></i> Add Task
+            </a>
+
+            <a type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal" href="/delete_created_challenge/{{ challenge.id }}">
+            <i class="fa fa-trash-o"></i> Delete Challenge
+            </a>
+
+
+
+            </div>
+            <h3>{{ challenge }}</h3>
+
+
+        </div>
+
+            <!-- Table -->
+            {% if tasks %}
+            <ul class="list-group">
+
+            {% for task in tasks %}
+            <a class="list-group-item" data-toggle="collapse"  class="accordion-toggle" href="#{{ task.id }}">
+                <h4><strong>{{ task }}</strong><i class="fa fa-caret-down fa-2x pull-right"></i></h4>
+            </a>
+
+            <div class="accordion-body collapse" id="{{ task.id }}">
+            <table class="table">
+            <tbody>
+            <tr class="info">
+
+            <td style="vertical-align:middle" width = 60%>{{ task.body }}</td>
+
+            <td style="vertical-align:middle" width = 20%>
+
+            <div class="btn-group pull-right">
+
+
+
+            <a type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal" href="/delete_challenge_task/{{ task.id }}">
+            <i class="fa fa-trash-o"></i>
+            </a>
+
+
+            </div>
+
+
+
+
+            </td>
+            </tr>
+            </tbody>
+            </table>
+            </div>
+            {% endfor %}
+
+            </ul>
+
+            {% else %}
+            <div class="panel-body">
+                <strong>No task has been specified.</strong>
+            </div>
+            {% endif %}
+
+            <div class="panel-footer">
+            </div>
+            
+
+    </div>
+
+    {% endif %}
+
+
+</div>
+
+</div>
+
+
+</div>
+
+{% endblock %}

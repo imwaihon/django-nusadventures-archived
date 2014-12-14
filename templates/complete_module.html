@@ -1,0 +1,36 @@
+{% extends 'superbase.html' %}
+
+{% load static %}
+
+
+
+{% block body_block %}
+
+
+<!-- Modal -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                 <h3 class="modal-title">Complete Module</h3>
+
+            </div>
+
+            <form id="delete_module_form" method="post" action="/complete_module/{{ module_code_url }}">
+            <div class="modal-body"><div class="te"></div>
+
+            Mark this module as complete? All tasks will be deleted and this module will be archived!
+            {% csrf_token %}
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Complete Module</button>
+            </div>
+
+            </form>
+        </div>
+        <!-- /.modal-content -->
+
+
+{% endblock %}

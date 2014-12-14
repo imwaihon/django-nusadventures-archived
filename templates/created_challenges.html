@@ -1,0 +1,128 @@
+{% extends 'base.html' %}
+
+
+{% block body_block %}
+
+<div class="container">
+
+  <div class="row">
+    <div class="col-md-8">
+    <h1>View Created Challenges</h1>
+
+    </div>
+
+    <div class="col-md-4">
+        <br>
+
+    <a data-toggle="modal" data-target="#myModal" href="/create_challenge">
+    <button type="button" class="btn btn-success pull-right
+    ">
+        <i class="fa fa-plus"></i> Create Challenge
+    </button>
+    </a>
+    </div>
+
+  </div>
+          <hr>
+  <br>
+
+  <div class="row">
+    <div class="col-md-12">
+
+
+    {% if user.is_authenticated %}
+
+    {% if challengetasks %}
+
+
+    {% for challenge, tasks in challengetasks.items %}
+
+    <div class="panel panel-danger">
+        <div class="panel-heading">
+            <div class="btn-group pull-right">
+            <a type="button" class="btn btn-default" href="/created_challenge/{{ challenge.id }}">
+            <i class="fa fa-eye"></i> View Challenge
+            </a>
+            </div>
+
+            <h3>{{ challenge }}</h3>
+        </div>
+
+        
+
+
+
+            <!-- Table -->
+            {% if tasks %}
+            <ul class="list-group">
+
+            {% for task in tasks %}
+            <a class="list-group-item" data-toggle="collapse" class="accordion-toggle" href="#{{ task.id }}">
+                <h4><strong>{{ task }}</strong><i class="fa fa-caret-down fa-2x pull-right"></i></h4>
+
+            </a>
+
+            <div class="accordion-body collapse" id="{{ task.id }}">
+            <table class="table">
+            <tbody>
+            <tr class="info">
+
+            <td style="vertical-align:middle" width = 80%>{{ task.body }}</td>
+
+            <td style="vertical-align:middle" width = 20%>
+
+            <div class="btn-group pull-right">
+
+
+
+            <a type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal" href="/delete_challenge_task/{{ task.id }}">
+            <i class="fa fa-trash-o"></i>
+            </a>            
+            </div>
+
+
+
+
+            </td>
+            </tr>
+
+
+            </tbody>
+            </table>
+            </div>
+            {% endfor %}
+
+            </ul>
+
+            {% else %}
+            <div class="panel-body">
+                <strong>No task has been specified.</strong>
+            </div>
+            {% endif %}
+
+            <div class="panel-footer">
+            </div>
+
+
+
+    </div>    
+
+    {% endfor %}
+
+
+    {% else %}
+        <strong>No challenges has been selected.</strong>
+    {% endif %}
+
+    {% endif %}
+
+
+
+    </div>
+
+
+
+</div>
+
+
+{% endblock %}

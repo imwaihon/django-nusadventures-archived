@@ -1,0 +1,36 @@
+{% extends 'superbase.html' %}
+
+{% load static %}
+
+
+
+{% block body_block %}
+
+
+<!-- Modal -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                 <h3 class="modal-title">Confirm Deletion</h3>
+
+            </div>
+
+            <form id="delete_task_form" method="post" action="/delete_created_challenge/{{ del_id }}">
+            <div class="modal-body"><div class="te"></div>
+
+            Delete this challenge? This cannot be reversed!
+            {% csrf_token %}
+
+            
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Delete</button>
+            </div>
+
+            </form>
+        </div>
+        <!-- /.modal-content -->
+
+
+{% endblock %}
